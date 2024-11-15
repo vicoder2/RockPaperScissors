@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let humanScore = 0; 
+    let computerScore = 0;
+    let roundCount = 1;
+
+    function getHumanChoice() {
+    let userInput = prompt("Choose Rock, Paper, or Scissors: ").toLowerCase().trim();
+
+        if (userInput) {
+            getComputerChoice(userInput);
+        }
+    }
+
+    getHumanChoice();
+
+        function getComputerChoice(userInput) {
+        let computerChoice; 
+
+            const randomChoice = Math.floor(Math.random()*3) + 1;
+            if (randomChoice === 1) {
+                computerChoice = "rock";
+                alert("The computer chose rock");
+            } else if (randomChoice === 2) {
+                computerChoice = "paper";
+                alert("The computer chose paper.");
+            } else if (randomChoice === 3) {
+                computerChoice = "scissors";
+                alert("The computer chose scissors.");
+            } 
+
+            if (userInput === computerChoice) {
+                roundCount++;
+                alert(`It's a tie!\nComputer score: ${computerScore}\nYour score: ${humanScore}\nRound: ${roundCount}`);
+            } else if (userInput === "rock" && computerChoice === "paper" || userInput === "paper" && computerChoice === "scissors" || 
+            userInput === "scissors" && computerChoice === "rock") {
+                roundCount++;
+                computerScore++; 
+                alert(`You lose!\nComputer score: ${computerScore}\nYour score: ${humanScore}\nRound: ${roundCount}`);
+            } 
+            
+            else {
+                roundCount++;
+                humanScore++;
+                alert(`You win!\nComputer score: ${computerScore}\nYour score: ${humanScore}\nRound: ${roundCount}`);
+            }
+        }
+
+        while (roundCount < 5) {
+            let playAgain = prompt("Wanna play another round? Yes or no").toLowerCase().trim();
+
+            if (playAgain === "yes") {
+                getHumanChoice();
+            } else if (playAgain === "no") {
+                alert(`Final score: Human - ${humanScore}, Computer - ${computerScore}\nRound: ${roundCount}. Thanks for playing!`);
+                break; 
+            }
+
+            if (roundCount === 5) {
+                alert(`Final score: Human - ${humanScore}, Computer - ${computerScore}\nRound: ${roundCount}.\nYou've reached the max number of rounds. Thanks for playing!`);
+                break; 
+            }
+        }
+    </script>
+</body>
+</html>
